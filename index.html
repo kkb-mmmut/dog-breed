@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dog Lovers</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+body{
+margin:0px;
+}
+ .header{
+    height:20vh;
+    width:100%;
+    background-color:teal; 
+     border:1px solid transparent;
+}
+.inputbox{
+    border:1px solid transparent;
+    margin:25px auto; 
+}
+#image-url{
+    border:2px solid teal; 
+    width:200px;
+}
+.inputbox select{
+    height:40px;
+    text-indent:10px;
+}
+.inputbox button{
+    color:white;
+    background-color:red;
+    border:2px solid teal;
+    height:45px;
+    width:80px;
+    cursor:pointer;
+}
+.container{
+    height:80vh;
+    width:100%;
+    background-color:wheat;
+    border:1px solid transparent;
+}
+#image_container{
+    border:2px solid teal;
+    height:400px;
+    width:400px;
+    background-color:red;
+	margin:20px auto;
+}
+.container button{
+    color:white;
+    background-color:red;
+    height:45px;
+    width:100px;
+    float:right; 
+    margin-top:-65px;
+}
+.image-text{
+    background-color:teal;
+    color:white;
+    height:100px;
+    width:340px;
+    float:left;
+    margin:-10px 20px;
+    text-align:center;
+margin-left:550px;
+}
+</style>
+</head>
+
+<body>
+<div class="header">
+    <div class="inputbox">
+        <center>
+        <select name="cars" id="image-url">
+  <option value="affenpinscher">Affenpinscher</option>
+  <option value="african">African</option>
+  <option value="airedale">Airedale</option>
+  <option value="akita">Akita</option>
+<option value="boxer">Boxer</option>
+  <option value="bluetick">Bluetick</option>
+  <option value="chow">Chow</option>
+</select>
+        <button id='get-image'>Get Image</button>
+            </center>
+    </div>
+    </div>
+    <div class="container">
+        <div id="image_container">
+            <img src='' id="img-src" height="400px" width="400px"/>
+        </div>
+        <div class="image-text">
+            Breed Type : 
+            <p id="breed-type">
+                
+            </p>
+        </div>
+        <button onclick="fetchRandomImage()">
+            Next Image
+        </button>
+    </div>
+<script>
+
+function fetchRandomImage(){
+var type=document.getElementById("image-url").value;
+var f_part='https://dog.ceo/api/breed/';
+var l_part='/images/random';
+var imageurl=f_part+type+l_part;
+var imgg=document.getElementById("breed-type").innerHTML=type;
+ 
+	$.get(imageurl,'https://dog.ceo/api/breeds/image/random',function(data){
+        var imageData=data.message;
+        $('#img-src').attr('src',imageData);
+        
+    })
+} 
+$("#get-image").click(function(){
+  fetchRandomImage();
+    console.log("chlicked");
+});  
+</script>
+</body>
+</html>
